@@ -5,11 +5,12 @@ const port = process.env.PORT || 5000;
 
 const app = express();
 
+const goalsRouter = require("./routes/goalRoutes");
+const { errorHandler } = require("./middleware/errorMiddleware");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const goalsRouter = require("./routes/goalRoutes");
-
-app.use("/api/goals", goalsRouter);
+app.use("/api/goals", [goalsRouter, errorHandler]);
 
 app.listen(port, () => console.log("Server is listening on port " + port));
