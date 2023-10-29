@@ -7,6 +7,9 @@ const app = express();
 
 const goalsRouter = require("./routes/goalRoutes");
 const { errorHandler } = require("./middleware/errorMiddleware");
+const connectDB = require("./config/db");
+
+connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
