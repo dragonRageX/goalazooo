@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const goalSchema = mongoose.Schema(   //think of schemas or models as the layout structure of your collection/table, where you define what fields/columns/attributes you want in your table, and each document/entry will have those fields.
     {
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,   //we linked or related the Goal collection/table to the User collection/table by adding the ObjectId attribute to the Goal schema. The ObjectId attribute references from the User schema.
             required: true,
             ref: "User"
         },
