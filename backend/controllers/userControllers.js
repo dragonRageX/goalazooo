@@ -34,9 +34,12 @@ const registerUser = asyncHandler(async (req, res) => {
     if(user)
     {
         return res.status(201).json({
-            _id: user.id,
-            name: user.name,
-            email: user.email
+            message: "Registered successfully!",
+            data: {
+                _id: user.id,
+                name: user.name,
+                email: user.email
+            }
         });
     }
     else
@@ -50,7 +53,25 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route   POST /api/users/login
 // @access   Public
 const loginUser = asyncHandler(async (req, res) => {
-    return res.status(200).json({ message: "Login User" });
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });   //fetch user from database based on the email he entered while logging in
+    if(user && (await bcrypt.compare(password, user.password)))
+    {
+        return res.status(200).json({
+            message: "Logged In successfully!",
+            data: {
+                _id: user.id,
+                name: user.name,
+                email: user.email
+            }
+        });
+    }
+    else
+    {
+        res.status(400);
+        throw new Error("Invalid credentials");
+    }
 });
 
 // @desc   GET user data
