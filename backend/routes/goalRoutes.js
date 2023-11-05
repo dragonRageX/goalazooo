@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const { 
     getGoals, 
     setGoal, 
@@ -7,7 +8,7 @@ const {
     deleteGoal 
 } = require("../controllers/goalControllers");
 
-const protectRoutes = require("../middleware/authMiddleware");
+const { protectRoutes } = require("../middleware/authMiddleware");
 
 router.get("/", protectRoutes, getGoals);
 
