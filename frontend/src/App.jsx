@@ -5,11 +5,14 @@ import {
   Route,
   Link
 } from "react-router-dom"
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import utilsContext from "./context/utilsContext";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path = "/" element={<Layout />}>
@@ -19,12 +22,17 @@ const router = createBrowserRouter(createRoutesFromElements(
   </Route>
 ));
 
+const USER_API_URL = "http://localhost:5000/api/users";
+
 function App()
 {
   return (
-    <div className="container">
-      <RouterProvider router={router} />
-    </div>
+    <utilsContext.Provider value={[USER_API_URL]}>
+      <div className="container">
+        <RouterProvider router={router} />
+        <ToastContainer />   {/*react-toastify package*/}
+      </div>
+    </utilsContext.Provider>
   )
 }
 
