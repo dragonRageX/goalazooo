@@ -1,5 +1,9 @@
 import React from "react"
 import { FaUser } from "react-icons/fa"
+import axios from "axios";
+import { useNavigate } from "react-router-dom"
+import utilsContext from "../context/utilsContext";
+import { toast } from "react-toastify";
 
 export default function Register()
 {
@@ -10,17 +14,51 @@ export default function Register()
         password2: ""
     });
 
+    const [USER_API_URL, user, setUser] = React.useContext(utilsContext);
+    const navigate = useNavigate();
+
     function handleChange(e)
     {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            [e.target.name]: [e.target.value]
+            [e.target.name]: e.target.value
         }));
     }
 
-    function handleSubmit(e)
+    async function handleSubmit(e)
     {
         e.preventDefault();
+
+        if(formData.password != formData.password2)
+        {
+            toast.error("Passwords do not match!");
+        }
+        else
+        {
+            try {
+                const response = await axios.post(`${USER_API_URL}`, {
+                    name: String(formData.name),
+                    email: String(formData.email),
+                    password: String(formData.password)
+                });
+    
+                console.log("Response: " + JSON.stringify(response.data));
+                console.log("Token: " + (response.data.data.token));
+                if(response.status === 201)
+                {
+                    localStorage.setItem("user", JSON.stringify(response.data.data));
+                    setUser(response.data.data);   //set the 'user' global state
+                    console.log(user);
+                    toast.success(response.data.message);
+                    navigate("/");
+                }
+            } catch (error) {
+                const errorMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+                console.error(errorMessage);
+                toast.error(errorMessage);
+            }
+        }
+
     }
 
     return (

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   RouterProvider,
   createBrowserRouter,
@@ -22,12 +23,14 @@ const router = createBrowserRouter(createRoutesFromElements(
   </Route>
 ));
 
-const USER_API_URL = "http://localhost:5000/api/users";
 
 function App()
 {
+  let [user, setUser] = React.useState(null);   //make the user context such that it always takes its value from localStorage.
+  const USER_API_URL = "http://localhost:5000/api/users";
+
   return (
-    <utilsContext.Provider value={[USER_API_URL]}>
+    <utilsContext.Provider value={[USER_API_URL, user, setUser]}>   {/*user: global state*/}
       <div className="container">
         <RouterProvider router={router} />
         <ToastContainer />   {/*react-toastify package*/}

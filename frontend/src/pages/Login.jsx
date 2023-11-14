@@ -12,14 +12,14 @@ export default function Login()
         password: "",
     });
 
-    const [USER_API_URL] = React.useContext(utilsContext);
+    const [USER_API_URL, user, setUser] = React.useContext(utilsContext);
     const navigate = useNavigate();
 
     function handleChange(e)
     {
         setFormData((prevFormData) => ({
             ...prevFormData,
-            [e.target.name]: [e.target.value]
+            [e.target.name]: e.target.value
         }));
     }
 
@@ -33,11 +33,14 @@ export default function Login()
                 password: String(formData.password)
             });
 
-            // console.log("Response: " + JSON.stringify(response.data));
-            // console.log("Token: " + (response.data.data.token));
+            console.log("Response: " + JSON.stringify(response.data));
+            console.log("Token: " + (response.data.data.token));
             if(response.status === 200)
             {
                 localStorage.setItem("user", JSON.stringify(response.data.data));
+                setUser(response.data.data);   //set the 'user' global state
+                console.log(user);
+                toast.success(response.data.message);
                 navigate("/");
             }
         } catch (error) {
