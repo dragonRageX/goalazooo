@@ -38,7 +38,7 @@ export default function Login()
             if(response.status === 200)
             {
                 localStorage.setItem("user", JSON.stringify(response.data.data));
-                setUser(response.data.data);   //set the 'user' global state
+                setUser(response.data.data);   //set the 'user' global state by retrieving the value with the key - 'user', from the just setup localStorage.
                 console.log(user);
                 toast.success(response.data.message);
                 navigate("/");

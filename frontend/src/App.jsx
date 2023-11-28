@@ -1,4 +1,6 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   RouterProvider,
   createBrowserRouter,
@@ -6,8 +8,6 @@ import {
   Route,
   Link
 } from "react-router-dom"
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import Layout from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
