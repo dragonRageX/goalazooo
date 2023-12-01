@@ -14,7 +14,7 @@ export default function Register()
         password2: ""
     });
 
-    const [USER_API_URL, user, setUser] = React.useContext(utilsContext);
+    const [USER_API_URL, GOALS_API_URL, user, setUser, goals, setGoals] = React.useContext(utilsContext);
     const navigate = useNavigate();
 
     function handleChange(e)

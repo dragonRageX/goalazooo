@@ -33,11 +33,11 @@ function App()
 {
   let [user, setUser] = React.useState((JSON.parse(localStorage.getItem("user"))) || null);   //make the 'user' global context such that it always takes its initial value from localStorage.
   const USER_API_URL = "http://localhost:5000/api/users";
-  let [goals, setGoals] = React.useState(null);
+  let [goals, setGoals] = React.useState([]);
   const GOALS_API_URL = "http://localhost:5000/api/goals";
 
   return (
-    <utilsContext.Provider value={[USER_API_URL, user, setUser, goals, setGoals]}>   {/*user: global state*/}
+    <utilsContext.Provider value={[USER_API_URL, GOALS_API_URL, user, setUser, goals, setGoals]}>   {/*user: global state*/}
       <div className="container">
         <RouterProvider router={router} />
         <ToastContainer />   {/*react-toastify package*/}

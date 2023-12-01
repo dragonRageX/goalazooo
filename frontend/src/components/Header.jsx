@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 export default function Header()
 {
-    const [USER_API_URL, user, setUser] = React.useContext(utilsContext);
+    const [USER_API_URL, GOALS_API_URL, user, setUser, goals, setGoals] = React.useContext(utilsContext);
     const navigate = useNavigate();
 
     function handleLogout()
