@@ -11,8 +11,9 @@ export default function Header()
 
     function handleLogout()
     {
-        localStorage.removeItem("user");
+        localStorage.removeItem("user");   //destroy the localStorage 'user' item on logout
         setUser(null);
+        toast.success("Logged Out successfully!");
         navigate("/");
     }
 

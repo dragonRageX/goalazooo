@@ -14,12 +14,17 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import utilsContext from "./context/utilsContext";
+import { loader as requireAuth } from "./pages/Dashboard";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path = "/" element={<Layout />}>
-    <Route index element={<Dashboard />}></Route>
-    <Route path="/login" element={<Login />}></Route>
-    <Route path="/register" element={<Register />}></Route>
+    <Route 
+      index 
+      element={<Dashboard />}
+      loader={requireAuth} 
+    />
+    <Route path="/login" element={<Login />} />
+    <Route path="/register" element={<Register />} />
   </Route>
 ));
 
