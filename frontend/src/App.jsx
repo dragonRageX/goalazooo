@@ -31,11 +31,13 @@ const router = createBrowserRouter(createRoutesFromElements(
 
 function App()
 {
-  let [user, setUser] = React.useState(null);   //make the user context such that it always takes its value from localStorage.
+  let [user, setUser] = React.useState((JSON.parse(localStorage.getItem("user"))) || null);   //make the 'user' global context such that it always takes its initial value from localStorage.
   const USER_API_URL = "http://localhost:5000/api/users";
+  let [goals, setGoals] = React.useState(null);
+  const GOALS_API_URL = "http://localhost:5000/api/goals";
 
   return (
-    <utilsContext.Provider value={[USER_API_URL, user, setUser]}>   {/*user: global state*/}
+    <utilsContext.Provider value={[USER_API_URL, user, setUser, goals, setGoals]}>   {/*user: global state*/}
       <div className="container">
         <RouterProvider router={router} />
         <ToastContainer />   {/*react-toastify package*/}

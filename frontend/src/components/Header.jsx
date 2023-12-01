@@ -23,7 +23,7 @@ export default function Header()
                 <Link to="/">GoalSetter</Link>
             </div>
             <ul>
-                {user ? (   //if the 'user' global state does exist that means a user is logged in, and hence we only show a 'logout' button to the logged-in user in the header. And if no 'user' state exists, that means no user has logged-in yet and hence, we show the unauthenticated user a 'login' and 'register' links in the header
+                {JSON.parse(localStorage.getItem("user")) ? (   //if the 'user' item in localStorage does exist that means a user is logged in, and hence we only show a 'logout' button to the logged-in user in the header. And if no 'user' item exists, that means no user has logged-in yet and hence, we show the unauthenticated user a 'login' and 'register' links in the header. We can also use the 'user' global state here as well, instead of retrieving the localStorage item. This can be done by using React.useContext() to access the 'user' global state in the Dashboard.jsx file, instead of accessing the localStorage item.
                     <li>
                         <button className="btn" onClick={handleLogout}>
                             <FaSignOutAlt /> Logout
