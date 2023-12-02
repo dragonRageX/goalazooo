@@ -13,6 +13,7 @@ export default function Header()
     {
         localStorage.removeItem("user");   //destroy the localStorage 'user' item on logout
         setUser(null);
+        setGoals([]);   //initial state or empty the goals array of the user
         toast.success("Logged Out successfully!");
         navigate("/");
     }

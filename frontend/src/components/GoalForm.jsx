@@ -25,6 +25,8 @@ export default function GoalForm()
             console.log("Response: " + JSON.stringify(response.data));
             if(response.status === 201)
             {
+                setGoals((prevGoals) => [...prevGoals, response.data.data]);   //update the 'goals' global context by pushing the recently created goal to the 'goals' array
+                console.log(goals);
                 toast.success(response.data.message);
             }
         } catch (error) {
