@@ -27,7 +27,7 @@ export async function loader()
             if(response.status === 200)
             {
                 const userGoals = response.data;
-                return { userGoals, user };   //perform some fetch operation like fetching the logged-in users goals
+                return { userGoals, user };
             }
         } catch (error) {
             const errorMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
@@ -42,19 +42,20 @@ export default function Dashboard()
     const data = useLoaderData();
     const userGoals = data.userGoals;
     const loggedInUser = data.user
-    console.log(loggedInUser);
 
     const [USER_API_URL, GOALS_API_URL, user, setUser, goals, setGoals] = React.useContext(utilsContext);
 
     React.useEffect(() => {
-        setGoals((prevGoals) => [...prevGoals, ...userGoals]);   //merge prevGoals and userGoals array into one
+        setGoals((prevGoals) => [...prevGoals, ...userGoals]);   //set the 'goals' global context by merging prevGoals and userGoals array into one when the component first renders
+        setUser(loggedInUser);   //set the 'user' global state
     }, []);
-    console.log(goals);
+    console.log(`Goals: ${JSON.stringify(goals)}`);
+    console.log(`User: ${JSON.stringify(user)}`);
 
     return (
         <>
             <section className="heading">
-                <h1>Welcome {loggedInUser && loggedInUser.name}</h1>
+                <h1>Welcome {user && user.name}</h1>
                 <p>Goals Dashboard</p>
             </section>
 
