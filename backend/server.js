@@ -20,4 +20,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/goals", [goalsRouter, errorHandler]);
 app.use("/api/users", [userRouter, errorHandler]);
 
+//for production purposes
+if(process.env.NODE_ENV === "production")
+{
+    app.use(express.static(path.join(__dirname, "..frontend/dist")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "../", "frontend", "dist", "index.html"));
+    });
+}
+
 app.listen(port, () => console.log("Server is listening on port " + port));
